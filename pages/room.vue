@@ -4,6 +4,21 @@ const roomsList = ref([]);
 // apiUrl : https://nuxr3.zeabur.app/api/v1/rooms
 // response 回傳後，將資料寫入 roomsList 變數
 // 使用 roomsList 變數在下方 template 渲染列表
+  fetch('https://nuxr3.zeabur.app/api/v1/rooms')
+    .then(response =>{
+      console.log(response)
+      if (!response.status) {
+        console.log("test")
+        throw new Error('網路回應不正確');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('取得的房間資料：', data);
+    })
+    .catch(error => {
+      console.error('Fetch 發生錯誤：', error);
+    });
 </script>
 
 <template>
